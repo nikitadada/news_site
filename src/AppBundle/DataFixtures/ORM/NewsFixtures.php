@@ -26,7 +26,6 @@ class NewsFixtures extends Fixture
         $tags[] = $tag;
 
         for ($i = 0; $i < 20; $i++) {
-
             $news = new News();
             $news->setTitle('news number ' . $i);
             $news->setText('Lorem ipsum dolor sit amet...');

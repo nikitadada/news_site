@@ -1,4 +1,2 @@
-
-index:
-    path:      /
-    defaults:  { _controller: AppBundle:News:index }
+imports:
+    resource: '@AppBundle/Resources/config/routing.yml'

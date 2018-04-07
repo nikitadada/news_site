@@ -1,0 +1,11 @@
+news_list:
+    path:     /
+    defaults: { _controller: AppBundle:News:index }
+    methods:  [GET]
+
+news_show:
+    path:     /news/{id}
+    defaults: { _controller: AppBundle:News:news }
+    methods:  [GET]
+    requirements:
+            id: '\d+'
