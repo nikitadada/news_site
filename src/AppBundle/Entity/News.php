@@ -43,13 +43,13 @@ class News
     private $created;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", inversedBy="news")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", inversedBy="news", cascade={"persist"})
      * @ORM\JoinTable(name="news_tags",joinColumns={@ORM\JoinColumn(name="news_id", referencedColumnName="id")})
      */
     private $tags;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      *
      * @Assert\NotBlank(message="Please, upload the news image")
      * @Assert\File(
