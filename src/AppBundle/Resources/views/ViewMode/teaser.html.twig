@@ -1,0 +1,6 @@
+<div class="fields">
+    <h2 class="field field-title">{{ item.title }}</h2>
+    <div class="field field-text">{{ item.text }}</div>
+    {% set path = path('news_show', {'id' : item.id}) %}
+    <div class="field field-item-link"><a href="{{ path }}"> Read more</a></div>
+</div>

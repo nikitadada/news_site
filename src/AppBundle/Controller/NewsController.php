@@ -21,8 +21,13 @@ class NewsController extends Controller
 
     public function newsAction($id)
     {
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+        $newsRepository = $this->getDoctrine()->getRepository('AppBundle:News');
+        $news = $newsRepository->find($id);
+        if(!$news) {
+            throw $this->createNotFoundException('News is not found');
+        }
+        return $this->render('@App/News/view.html.twig', [
+            'news' => $news
         ]);
     }
 }
