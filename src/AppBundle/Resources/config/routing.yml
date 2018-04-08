@@ -3,9 +3,52 @@ news_list:
     defaults: { _controller: AppBundle:News:index }
     methods:  [GET]
 
-news_show:
+news_view:
     path:     /news/{id}
-    defaults: { _controller: AppBundle:News:news }
+    defaults: { _controller: AppBundle:News:view }
     methods:  [GET]
     requirements:
-            id: '\d+'
+        id: '\d+'
+
+news_add:
+    path:    /news/add
+    defaults: { _controller: AppBundle:News:add }
+    requirements:
+        id: '\d+'
+
+news_edit:
+    path:    /news/{id}/edit
+    requirements:
+        id: '\d+'
+
+news_delete:
+    path:    /news/{id}/delete
+    requirements:
+        id: '\d+'
+
+tag_add:
+    path:    /tag/add
+    requirements:
+        id: '\d+'
+
+tag_edit:
+    path:    /tag/{id}/edit
+    requirements:
+        id: '\d+'
+
+tag_delete:
+    path:    /tag/{id}/delete
+    requirements:
+        id: '\d+'
+
+tag_list:
+    path:     /tags
+    defaults: { _controller: AppBundle:Tag:index }
+    methods:  [GET]
+
+tag_view:
+    path:     /tag/{id}
+    defaults: { _controller: AppBundle:Tag:view }
+    methods:  [GET]
+    requirements:
+        id: '\d+'

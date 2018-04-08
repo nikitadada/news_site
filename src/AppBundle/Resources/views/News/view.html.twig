@@ -7,10 +7,13 @@
         <div class="block-content">
             <h2 class="field field-title">{{ news.title }}</h2>
             <div class="field field-text">{{ news.text }}</div>
+            <div class="field field-text">{{ news.image }}</div>
             <div class="field field-tag">
                 {% for t in news.tags %} {{ t.title }}<br> {% endfor %}
             </div>
-            <div class="field field-created">{{ news.created|date('d-m-Y') }}</div>
+            <div class="field field-created">
+                <a href="{{ asset('uploads/news/' ~ news.image) }}">View image</a>
+            </div>
 
         </div>
     </div>
