@@ -15,5 +15,5 @@ parameters:
     mailer_user: ~
     mailer_password: ~
 
-   secret: 562c9ee3e8613407d1c2fae891a55ecc320fd766
-   files_directory: uploads/news
+    secret: 562c9ee3e8613407d1c2fae891a55ecc320fd766
+    files_directory: uploads/news
