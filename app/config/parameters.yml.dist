@@ -17,3 +17,5 @@ parameters:
 
     secret: 562c9ee3e8613407d1c2fae891a55ecc320fd766
     files_directory: uploads/news
+    admin_email: admin@mail.com
+    admin_password: 111111
