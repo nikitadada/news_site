@@ -27,14 +27,15 @@
                         <span><i class="glyphicon glyphicon-book"></i> <i>tags: </i>{% for t in item.tags %} {{ t.title }} {% endfor %} </span>
                     </li>
                     <li>|</li>
-                    <li><span> <a onclick="Share.vkontakte('{{ absolute_url(path('news_view', {'id' : item.id})) }}','\n'+
-                                    'link to a cool resource','','DESC')"> Share vk</a> </span></li>
+                    <li><span> <a style="cursor: pointer" onclick="Share.vkontakte('{{ absolute_url(path('news_view', {'id' : item.id})) }}','\n'+
+                                    'link to a cool resource','','DESC')"> Share vk</a>
+                        </span></li>
                     <li>|</li>
-                    <li><span> <a onclick="Share.facebook('{{ absolute_url(path('news_view', {'id' : item.id})) }}','\n'+
+                    <li><span> <a style="cursor: pointer" onclick="Share.facebook('{{ absolute_url(path('news_view', {'id' : item.id})) }}','\n'+
                                     'link to a cool resource','','DESC')"> Share fb</a> </span></li>
                     <li>|</li>
                     <li>
-                        <span> <a onclick="Share.twitter('{{ absolute_url(path('news_view', {'id' : item.id})) }}','link to a cool resource')"> twitter</a> </span>
+                        <span> <a style="cursor: pointer" onclick="Share.twitter('{{ absolute_url(path('news_view', {'id' : item.id})) }}','link to a cool resource')"> twitter</a> </span>
                     </li>
                 </ul>
             </div>
