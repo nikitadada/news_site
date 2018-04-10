@@ -1,15 +1,26 @@
 {% extends '@App/Layout/layout.html.twig' %}
 
 {% block regionRight %}
-    <div class="block block-news-add">
+    <div class="block block-news-edit">
         <div class="block-title"></div>
 
         <div class="block-content">
+            {% for message in app.flashes('success') %}
+                <div class="flash-notice col-md-2 col-md-offset-3">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="flash-notice col-md-2 col-md-offset-3">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Add news</div>
+                            <div class="panel-heading">Edit</div>
                             <div class="panel-body">
                                 {{ form_start(form) }}
                                 <div class="form_group">
@@ -39,7 +50,7 @@
                                 <div class="form-group">
                                     <div class="col-md-8 col-md-offset-4" style="margin-top:5px;">
                                         <button type="submit" class="btn btn-primary">
-                                            <i class="fa fa-btn fa-user"></i> Save
+                                            <i class="fa fa-btn fa-user"></i> Edit
                                         </button>
                                     </div>
                                 </div>

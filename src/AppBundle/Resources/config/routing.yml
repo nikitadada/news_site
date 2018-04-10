@@ -18,37 +18,30 @@ news_add:
 
 news_edit:
     path:    /news/{id}/edit
+    defaults: { _controller: AppBundle:News:edit }
     requirements:
         id: '\d+'
 
 news_delete:
     path:    /news/{id}/delete
+    defaults: { _controller: AppBundle:News:remove }
     requirements:
         id: '\d+'
 
-tag_add:
-    path:    /tag/add
+news_search:
+    path:    /news/{id}/tag
+    defaults: { _controller: AppBundle:News:search }
     requirements:
         id: '\d+'
 
-tag_edit:
-    path:    /tag/{id}/edit
-    requirements:
-        id: '\d+'
+login:
+    path: /login
+    defaults: { _controller: AppBundle:Security:login }
 
-tag_delete:
-    path:    /tag/{id}/delete
-    requirements:
-        id: '\d+'
+security_login_check:
+    path: /login-check
+    defaults: { _controller: AppBundle:Security:loginCheck }
 
-tag_list:
-    path:     /tags
-    defaults: { _controller: AppBundle:Tag:index }
-    methods:  [GET]
-
-tag_view:
-    path:     /tag/{id}
-    defaults: { _controller: AppBundle:Tag:view }
-    methods:  [GET]
-    requirements:
-        id: '\d+'
+logout:
+    path: /logout
+    defaults: { _controller: AppBundle:Security:logout }

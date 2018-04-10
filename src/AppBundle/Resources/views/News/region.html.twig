@@ -1,0 +1,40 @@
+<div class="block block-news-list">
+    <div class="block-title"></div>
+
+    <div class="block-content">
+        <div class="list news-list">
+            {% for n in pagination %}
+                <div class="news-item">
+                    {{ include('@App/ViewMode/teaser.html.twig', {'item' : n}) }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="navigation">
+            <script>
+                $(function () {
+                    $('.navigation').on('click', function (e) {
+                        e.preventDefault();
+                    });
+
+                    $('.navigation').on('click', "li", function (e) {
+                        var url = $(this).find('a').attr('href');
+                        e.preventDefault();
+                        if (!$(this).hasClass('disabled')) {
+                            $.ajax({
+                                type: "GET",
+                                url: url
+                            })
+                                .done(function (msg) {
+                                    $('.layout-region-wrap').html(msg);
+                                    window.history.pushState("object or string", "News site", url);
+                                });
+                        }
+                    });
+                });
+            </script>
+            <span class="navigation-bar" style="font-size: x-large">
+                    {{ knp_pagination_render(pagination) }}
+                </span>
+        </div>
+    </div>
+</div>

@@ -1,17 +1,6 @@
-{% extends '@App/Layout/layout-two-col-4-8.html.twig' %}
+{% extends '@App/Layout/layout.html.twig' %}
 
 {% block regionRight %}
-    <div class="block block-news-list">
-        <div class="block-title"></div>
-
-        <div class="block-content">
-            <div class="list news-list">
-                {% for n in news %}
-                    <div class="news-item">
-                        {{ include('@App/ViewMode/teaser.html.twig', {'item' : n}) }}
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
+    {% include('@App/News/region.html.twig') %}
 {% endblock %}
+

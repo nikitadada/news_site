@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="news")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\NewsRepository")
  */
 class News
 {
@@ -49,7 +49,7 @@ class News
     private $tags;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string")
      *
      * @Assert\NotBlank(message="Please, upload the news image")
      * @Assert\File(

@@ -1,0 +1,61 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div class="layout layout-two-col-4-8">
+        <div class="layout-region layout-region-header">
+            {% block regionHeader %}
+
+                <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="{{ path('news_list') }}">News site</a>
+                        </div>
+                        <ul class="nav navbar-nav">
+                            {% for t in tags %}
+                                {% set id = t.id %}
+                                <li><a href="{{ path('news_search', {'id': id}) }}">{{ t.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+
+
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if app.user != null %}
+                                <li>
+                                    <a style="color: white" href="{{ path('news_add') }}"
+                                       class="btn btn-success active">
+                                        Add news
+                                    </a>
+                                </li>
+                                <li><a href="#"><span class="glyphicon glyphicon-user"></span> You
+                                        admin</a></li>
+                                <li><a href="{{ path('logout') }}"><span class="glyphicon glyphicon-log-in"></span>
+                                        Logout</a></li>
+                            {% endif %}
+                            {% if app.user == null %}
+                                <li><a href="{{ path('login') }}"><span
+                                                class="glyphicon glyphicon-user"></span>Login</a>
+                                </li>
+                            {% endif %}
+
+                        </ul>
+                    </div>
+                </nav>
+
+            {% endblock %}
+
+        </div>
+        <div class="row">
+            <div style="width: auto">
+                <div class="layout-region-wrap">
+                    <div class="layout-region layout-region-right">
+                        {% block regionRight %} {% endblock %}
+                    </div>
+                    <div class="layout-region layout-region-left">
+                        {% block regionLeft %} {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

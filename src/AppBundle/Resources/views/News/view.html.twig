@@ -1,20 +1,38 @@
-{% extends '@App/Layout/layout-two-col-4-8.html.twig' %}
+{% extends '@App/Layout/layout.html.twig' %}
 
 {% block regionRight %}
-    <div class="block block-news-view">
-        <div class="block-title"></div>
-
-        <div class="block-content">
-            <h2 class="field field-title">{{ news.title }}</h2>
-            <div class="field field-text">{{ news.text }}</div>
-            <div class="field field-text">{{ news.image }}</div>
-            <div class="field field-tag">
-                {% for t in news.tags %} {{ t.title }}<br> {% endfor %}
+    <div class="container">
+        <div class="well">
+            <div class="media">
+                <a class="pull-left" href="#">
+                    <img style="height: 120px" class="media-object" src="{{ asset('uploads/news/' ~ news.image) }}">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">{{ news.title }}</h4>
+                    <p class="text-right"><span><i
+                                    class="glyphicon glyphicon-calendar"></i> {{ news.created|date('d-m-Y') }} </span>
+                    </p>
+                    <p>{{ news.text }}</p>
+                    <ul class="list-inline list-unstyled">
+                        <li>|</li>
+                        {% if app.user != null %}
+                            {% set pathDelete = path('news_delete', {'id' : news.id}) %}
+                            {% set pathEdit = path('news_edit', {'id' : news.id}) %}
+                            <span><i class="glyphicon glyphicon-edit"></i> <a href="{{ pathEdit }}"> Edit</a></span>
+                            <li>|</li>
+                            <li><span><i class="glyphicon glyphicon-remove"></i> <a
+                                            href="{{ pathDelete }}"> Remove</a> </span></li>
+                            <li>|</li>
+                        {% endif %}
+                        {% set path = path('news_view', {'id' : news.id}) %}
+                        <li><a href="{{ asset('uploads/news/' ~ news.image) }}">Original image</a></li>
+                        <li>|</li>
+                        <li>
+                            <span><i class="glyphicon glyphicon-book"></i> <i>tags: </i>{% for t in news.tags %} {{ t.title }} {% endfor %} </span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="field field-created">
-                <a href="{{ asset('uploads/news/' ~ news.image) }}">View image</a>
-            </div>
-
         </div>
     </div>
 {% endblock %}

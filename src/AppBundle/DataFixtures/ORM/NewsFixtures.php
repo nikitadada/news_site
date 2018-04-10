@@ -29,6 +29,7 @@ class NewsFixtures extends Fixture
             $news = new News();
             $news->setTitle('news number ' . $i);
             $news->setText('Lorem ipsum dolor sit amet...');
+            $news->setImage('news.jpg');
             $news->addTag($tags[mt_rand(0, 2)]);
 
             $manager->persist($news);
