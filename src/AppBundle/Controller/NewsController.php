@@ -59,7 +59,6 @@ class NewsController extends Controller
                 'tags' => $tags
             ]);
         }
-
     }
 
     public function viewAction($id)
