@@ -7,13 +7,14 @@ use AppBundle\Entity\Tag;
 use AppBundle\Form\NewsDeleteForm;
 use AppBundle\Form\NewsForm;
 use AppBundle\Service\FileManager;
+use AppBundle\Service\PaginationManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 
 class NewsController extends Controller
 {
-    public function searchAction(Request $request, $id)
+    public function searchAction(Request $request, $id, PaginationManager $pm)
     {
         $em = $this->getDoctrine()->getManager();
         $tag = $em->getRepository(Tag::class)->find($id);
@@ -21,11 +22,9 @@ class NewsController extends Controller
         $tags = $em->getRepository(Tag::class)->findAll();
 
         $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $news,
-            $request->query->getInt('page', 1),
-            3
-        );
+        $page = $request->query->getInt('page', 1);
+
+        $pagination = $pm->getPagination($news, $page, $paginator);
 
         if ($request->isXmlHttpRequest()) {
             return $this->render('@App/News/region.html.twig', [
@@ -39,18 +38,16 @@ class NewsController extends Controller
         }
     }
 
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, PaginationManager $pm)
     {
         $em = $this->getDoctrine()->getManager();
         $news = $em->getRepository(News::class)->findAll();
         $tags = $em->getRepository(Tag::class)->findAll();
 
         $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $news,
-            $request->query->getInt('page', 1),
-            3
-        );
+        $page = $request->query->getInt('page', 1);
+
+        $pagination = $pm->getPagination($news, $page, $paginator);
 
         if ($request->isXmlHttpRequest()) {
             return $this->render('@App/News/region.html.twig', [
@@ -99,6 +96,7 @@ class NewsController extends Controller
             $em->flush();
             return $this->redirectToRoute('news_view', ['id' => $news->getId()]);
         }
+
         $tagsRepository = $this->getDoctrine()->getRepository('AppBundle:Tag');
         $tags = $tagsRepository->findAll();
         return $this->render('@App/News/add.html.twig', [
@@ -135,6 +133,7 @@ class NewsController extends Controller
             $this->addFlash('success', 'News edited!');
             return $this->redirectToRoute('news_edit', ['id' => $news->getId()]);
         }
+
         $tagsRepository = $this->getDoctrine()->getRepository('AppBundle:Tag');
         $tags = $tagsRepository->findAll();
         return $this->render('@App/News/edit.html.twig', [
@@ -170,6 +169,7 @@ class NewsController extends Controller
             return $this->redirectToRoute('news_list', ['id' => $news->getId()]);
         }
         $tags = $em->getRepository(Tag::class)->findAll();
+
         return $this->render('@App/News/delete.html.twig', [
             'form' => $form->createView(),
             'tags' => $tags

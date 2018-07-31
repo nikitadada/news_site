@@ -10,16 +10,16 @@ class NewsRepository extends EntityRepository
 {
     public function findAll()
     {
-        return $this->createQueryBuilder("n");
+        return $this->createQueryBuilder("n")->getQuery();
     }
 
     public function findByTag(Tag $tag)
     {
-        $qb = $this->createQueryBuilder('n');
-        $qb->add('select', 'n');
-        $qb->leftJoin('n.tags', 't');
-        $qb->where('t.title = :tag');
-        $qb->setParameter('tag', $tag->getTitle());
+        $qb = $this->createQueryBuilder('n')
+            ->add('select', 'n')
+            ->leftJoin('n.tags', 't')
+            ->where('t.title = :tag')
+            ->setParameter('tag', $tag->getTitle());
         return $qb->getQuery();
     }
 }

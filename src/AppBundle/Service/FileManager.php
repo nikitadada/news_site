@@ -6,6 +6,8 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class FileManager
 {
+    const DEFAULT_FILE_NAME = "news.jpg";
+
     private $targetDirectory;
 
     public function __construct($targetDirectory)
@@ -27,7 +29,7 @@ class FileManager
         $fs = new Filesystem();
         $file = $this->getTargetDirectory() . '/' . $fileName;
 
-        if ($fileName == "news.jpg") return false;
+        if ($fileName == $this::DEFAULT_FILE_NAME) return false;
 
         if ($fs->exists($file)) {
             $fs->remove($file);
